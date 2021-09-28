@@ -1,0 +1,14 @@
+* Onett
+A 3d replica written in Three.js
+
+** How to run
+Clone this repository and run
+
+#+begin_src bash
+npm install
+
+# Alternatively
+yarn add
+#+end_src
+
+Then, simply issue =yarn start=.
