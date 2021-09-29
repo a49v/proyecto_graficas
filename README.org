@@ -1,5 +1,5 @@
 * Onett
-A 3d replica written in Three.js
+A 3D replica written in Three.js
 
 ** How to run
 Clone this repository and run
@@ -11,4 +11,4 @@ npm install
 yarn add
 #+end_src
 
-Then, simply issue =yarn start=.
+Then, simply issue =yarn start= and access =localhost:10001=
