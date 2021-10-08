@@ -12,7 +12,7 @@ export default {
   plugins: [
     resolve(),
     terser(),
-    serve(),
+    serve({contentBase: ['dist']}),
     livereload({
       watch: [
         path.resolve(__dirname, 'dist'),
