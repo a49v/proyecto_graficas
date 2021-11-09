@@ -7,7 +7,7 @@ import { terser } from "rollup-plugin-terser";
 export default {
   input: 'src/main.js',
   output: {
-      file: 'dist/app.js',
+    file: 'dist/app.js',
   },
   plugins: [
     resolve(),

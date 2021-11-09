@@ -2,29 +2,55 @@ import {
   BoxBufferGeometry,
   Mesh,
   MeshBasicMaterial,
+  MeshPhongMaterial,
   PerspectiveCamera,
+  PointLight,
   Scene,
+  SphereGeometry,
   WebGLRenderer
 } from 'three';
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-
 let camera, scene, renderer;
+const objects = []
 
 class App {
 
   init() {
-
-    camera = new PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
-    camera.position.z = 400;
+    // Camera
+    const fov = 40
+    const aspect = window.innerWidth / window.innerHeight
+    const near = 1
+    const far = 1000
+    camera = new PerspectiveCamera(fov, aspect, near, far);
+    camera.position.set(0, 50, 0)
+    camera.up.set(0, 0, 1)
+    camera.lookAt(0, 0, 0)
 
     scene = new Scene();
 
-    const geometry = new BoxBufferGeometry( 100, 100, 100 );
-    const material = new MeshBasicMaterial({ color: 0x222222 });
 
-    const mesh = new Mesh( geometry, material );
-    scene.add( mesh );
+    // Sphere
+    const radius = 1
+    const widthSegments = 6
+    const heightSegments = 6
+    const sphereGeometry = new SphereGeometry(radius, widthSegments, heightSegments)
+
+    const sunMaterial = new MeshPhongMaterial({ emissive: 0xFFFF00 })
+    const sunMesh = new Mesh(sphereGeometry, sunMaterial)
+    sunMesh.scale.set(5, 5, 5)
+
+    objects.push(sunMesh)
+
+    scene.add(sunMesh);
+
+    // Light
+    {
+      const color = 0xFFFFFF
+      const intensity = 3
+      const light = new PointLight(color, intensity)
+
+      scene.add(light)
+    }
 
     renderer = new WebGLRenderer( { antialias: true } );
     renderer.setPixelRatio( window.devicePixelRatio );
@@ -33,28 +59,23 @@ class App {
 
     window.addEventListener( 'resize', onWindowResize, false );
 
-    const controls = new OrbitControls( camera, renderer.domElement );
-
     animate();
-
   }
-
 }
 
 function onWindowResize() {
-
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 
-  renderer.setSize( window.innerWidth, window.innerHeight );
-
+  renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-function animate() {
+function animate(time) {
+  time *= 0.001
+  requestAnimationFrame(animate);
 
-  requestAnimationFrame( animate );
-  renderer.render( scene, camera );
-
+  objects.forEach(o => o.rotation.y = time)
+  renderer.render(scene, camera);
 }
 
 export default App;
