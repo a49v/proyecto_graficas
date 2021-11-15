@@ -17,6 +17,7 @@
     "rollup-plugin-terser": "^7.0.2"
   },
   "dependencies": {
+    "eslint": "^8.2.0",
     "three": "^0.132.2"
   }
 }
