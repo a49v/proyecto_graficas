@@ -22,9 +22,15 @@ class World {
     const cube = createCube();
     const light = createLights();
     scene.add(cube, light);
+
+    const resizer = new Resizer(container, camera, renderer);
   }
 
   render() { renderer.render(scene, camera) }
+
+  start() {}
+
+  stop() {}
 }
 
 export { World }
