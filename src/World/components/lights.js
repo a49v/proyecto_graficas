@@ -1,11 +1,16 @@
-import { DirectionalLight } from 'three';
+import {
+  DirectionalLight,
+  AmbientLight,
+  HemisphereLight
+} from 'three';
 
 const createLights = _ => {
-  const light = new DirectionalLight('white', 8);
+  const mainLight = new DirectionalLight('white', 8);
+  const ambientLight = new AmbientLight('white', 5); // Usually, set this lower than direct light
 
-  light.position.set(0, 0, 10);
+  mainLight.position.set(0, 0, 10);
 
-  return light;
+  return { mainLight, ambientLight };
 }
 
 export { createLights };
