@@ -18,6 +18,8 @@ const createCube = _ => {
   const material = createMaterial()
   const cube = new Mesh(geometry, material);
 
+  cube.rotation.set(0.5, 0, 0);
+
   cube.tick = delta => {
     cube.rotation.x += Math.PI / 4 * delta;
     cube.rotation.y += Math.PI / 4 * delta;
