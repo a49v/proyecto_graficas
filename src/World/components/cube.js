@@ -1,10 +1,22 @@
-import { BoxBufferGeometry, MeshStandardMaterial, Mesh } from 'three';
+import {
+  BoxBufferGeometry,
+  MeshStandardMaterial,
+  TextureLoader,
+  Mesh
+} from 'three';
+
+const createMaterial = _ => {
+  const textureLoader = new TextureLoader();
+  const texture = textureLoader.load('/assets/textures/uv-test-bw.png');
+
+  const material = new MeshStandardMaterial({ map: texture });
+  return material
+}
 
 const createCube = _ => {
   const geometry = new BoxBufferGeometry();
-  const material = new MeshStandardMaterial({ color: 'white' });
+  const material = createMaterial()
   const cube = new Mesh(geometry, material);
-
 
   cube.tick = delta => {
     cube.rotation.x += Math.PI / 4 * delta;
