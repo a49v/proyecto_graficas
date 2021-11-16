@@ -7,14 +7,14 @@ import {
 
 const createMaterial = _ => {
   const textureLoader = new TextureLoader();
-  const texture = textureLoader.load('/assets/textures/uv-test-bw.png');
+  const texture = textureLoader.load('/assets/textures/stonewall-albedo.png');
 
-  const material = new MeshStandardMaterial({ map: texture });
+  const material = new MeshStandardMaterial({ map: texture, color: 'gray' });
   return material
 }
 
 const createCube = _ => {
-  const geometry = new BoxBufferGeometry();
+  const geometry = new BoxBufferGeometry(2, 2, 2);
   const material = createMaterial()
   const cube = new Mesh(geometry, material);
 
