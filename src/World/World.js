@@ -10,8 +10,10 @@ import { createControls } from './systems/controls';
 import { Resizer } from './systems/Resizer';
 import { Loop } from './systems/Loop';
 
+
 let scene;
 let camera;
+let controls;
 let renderer;
 let loop;
 
@@ -20,10 +22,10 @@ class World {
     scene = createScene();
     camera = createCamera();
     renderer = createRenderer();
+    controls = createControls(camera, renderer.domElement);
     loop = new Loop(camera, scene, renderer);
     container.append(renderer.domElement);
 
-    const controls = createControls(camera, renderer.domElement);
 
     // This is for on demand rendering
     controls.addEventListener('change', () => this.render())
@@ -31,7 +33,7 @@ class World {
     const cube = createCube();
     const { mainLight, ambientLight } = createLights();
     scene.add(cube, mainLight, ambientLight);
-    // loop.updateables.push(cube);
+    loop.updateables.push(cube);
     loop.updateables.push(controls)
 
     const resizer = new Resizer(container, camera, renderer);
