@@ -1,7 +1,8 @@
 // Components
 import { createCamera } from './components/camera';
 import { createScene } from './components/scene';
-import { createCube } from './components/cube'
+import { createSquare } from './components/square'
+import { createSphere } from './components/sphere'
 import { createLights } from './components/lights'
 
 // Systems
@@ -17,10 +18,11 @@ let controls;
 let renderer;
 let loop;
 
+
 class World {
   constructor(container) {
     scene = createScene();
-    camera = createCamera();
+    camera = createCamera(container);
     renderer = createRenderer();
     controls = createControls(camera, renderer.domElement);
     loop = new Loop(camera, scene, renderer);
@@ -30,11 +32,14 @@ class World {
     // This is for on demand rendering
     controls.addEventListener('change', () => this.render())
 
-    const cube = createCube();
     const { mainLight, ambientLight } = createLights();
-    scene.add(cube, mainLight, ambientLight);
-    loop.updateables.push(cube);
+    scene.add(mainLight, ambientLight);
+
+    // Objects that will be animated
     loop.updateables.push(controls)
+
+    // Some event listeners
+    container.addEventListener('click', event => this.spawnObject(), false)
 
     const resizer = new Resizer(container, camera, renderer);
   }
@@ -52,6 +57,12 @@ class World {
   start() { loop.start() }
 
   stop() { loop.stop() }
+
+  spawnObject() {
+    const sphere = createSphere();
+    scene.add(sphere);
+    loop.updateables.push(sphere);
+  }
 }
 
 export { World }

@@ -1,9 +1,9 @@
-import { PerspectiveCamera } from 'three';
+import { PerspectiveCamera, OrthographicCamera, Vector3 } from 'three';
 
-const createCamera = _ => {
+const createCamera = container => {
   const camera = new PerspectiveCamera(
     35,  // fov
-    1,   // aspect (dummy value, for now)
+    container.clientWidth / container.clientHeight,
     0.1, // near
     100  // far
   );

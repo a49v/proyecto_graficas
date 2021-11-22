@@ -16,25 +16,27 @@ const createMaterial = _ => {
 }
 
 const createCube = _ => {
-  const geometry = new BoxBufferGeometry(2, 2, 2);
+  const geometry = new BoxBufferGeometry(1, 1, 1);
   const material = createMaterial()
   const cube = new Mesh(geometry, material);
 
-  let position = { x: 0, y: 0 };
-  let target = { x: 10, y: 10 };
-  let tween = new TWEEN.Tween(position).to(target, 10000);
+  let scale = { x: 1, y: 1, z: 1 }
+  let target = { x: 0, y: 0, z: 0 }
+  let tween = new TWEEN.Tween(scale).to(target, 10000);
 
-  tween.start();
   tween.onUpdate(_ => {
-    cube.position.x = position.x,
-    cube.position.y = position.y
+    cube.scale.x = scale.x
+    cube.scale.y = scale.y
+    cube.scale.z = scale.z
   })
 
+  tween.start()
+
   cube.tick = delta => {
-    // cube.rotation.x += Math.PI / 4 * delta;
-    // cube.rotation.y += Math.PI / 4 * delta;
-    // cube.rotation.z += Math.PI / 4 * delta;
-    tween.update();
+    cube.rotation.x += Math.PI / 4 * delta;
+    cube.rotation.y += Math.PI / 4 * delta;
+    cube.rotation.z += Math.PI / 4 * delta;
+    tween.update()
   }
 
   return cube;
