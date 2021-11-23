@@ -5,9 +5,81 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
     <link rel="stylesheet" href="./styles/main.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="./styles/tailwind.css" type="text/css"/>
   </head>
+
   <body>
-    <div id="scene-container"></div>
+
+    <!--Modal-->
+    <div class="z-40 modal
+                fixed w-full h-full top-0 left-0 flex
+                items-center justify-center">
+
+      <!--  Overlay: Change color here -->
+      <div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div>
+
+      <div class="bg-black w-11/12
+                  text-white
+                  max-w-full lg:max-w-2xl mx-auto
+                  rounded shadow-lg
+                  z-50 overflow-y-auto max-h-screen">
+
+        <!-- Add margin if you want to see some of the overlay behind the modal-->
+        <div class="modal-content py-4 text-left px-6">
+
+          <!-- Modal header-->
+          <div class="flex justify-between items-center pb-3">
+            <div class="modal-close cursor-pointer p-2 hover:bg-green-900 z-60">
+              <svg class="fill-current text-white"
+                   xmlns="http://www.w3.org/2000/svg"
+                   width="18" height="18" viewBox="0 0 18 18">
+                <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47
+                         3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47
+                         4.47 1.06-1.06L10.06 9z"></path>
+              </svg>
+            </div>
+          </div>
+
+          <!--Body-->
+          <div class="container px-5 mx-auto flex flex-col">
+
+            <div class="flex flex-col sm:flex-row mt-10">
+              <!-- Left body -->
+              <div class="sm:w-1/3 text-center sm:pr-8 sm:py-8">
+                <!-- Titulo de obra -->
+                <div class="flex flex-col items-center text-center justify-center">
+                  <h2 class="font-medium title-font mt-4 text-white text-lg" id="workTitle">Proyecto Final</h2>
+                  <div class="w-12 h-1 bg-green-600 rounded mt-2 mb-4"></div>
+                  <p class="text-base text-gray-600" id="description">Un experimento audiovisual en Three.js</p>
+                </div>
+              </div>
+
+              <!-- Texto explicativo -->
+              <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-300
+                          sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
+
+                <p class="leading-relaxed text-lg mb-4" id="explanation">
+                  Utiliza las teclas "ASDFGHJK", para reproducir notas de la escala Do mayor.
+                </p>
+
+                <p class="leading-relaxed text-lg mb-4" id="explanation">
+                  Mueve la cámara con TODO
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!--Footer-->
+          <div class="flex justify-end pt-2">
+            <button class="modal-close px-4 bg-green-500
+                           p-3 rounded-lg text-white hover:bg-green-600">Empezar</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div id="scene-container" class="z-0"></div> --
     <script src="./app.js" defer></script>
   </body>
 </html>
