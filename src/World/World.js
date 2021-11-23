@@ -12,6 +12,8 @@ import { createControls } from './systems/controls';
 import { Resizer } from './systems/Resizer';
 import { Loop } from './systems/Loop';
 
+// Utils
+import { getRandomInt } from './utils/functools';
 
 let scene;
 let camera;
@@ -63,9 +65,21 @@ class World {
   stop() { loop.stop() }
 
   spawnObject() {
-    const sphere = createSphere(0.1);
-    scene.add(sphere);
-    loop.updateables.push(sphere);
+    let fig;
+    switch (getRandomInt(3)) {
+      case 0:
+        fig = createSphere(0.1);
+        break;
+      case 1:
+        fig = createSquare()
+        break;
+      case 2:
+        fig = createCircle()
+        break;
+    }
+
+    scene.add(fig);
+    loop.updateables.push(fig);
   }
 }
 

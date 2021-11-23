@@ -9,6 +9,9 @@ import {
 
 import { createTexture } from './textures'
 import { spinX, moveRadialOutwards } from '../systems/animations';
+import { colors } from './colors';
+import { reflectionCube } from './cubeMap'
+import { getRandomInt } from '../utils/functools';
 
 const { normalMap, clearcoatNormalMap } = createTexture();
 
@@ -19,30 +22,24 @@ const geometry = new CircleBufferGeometry(
   0, 2 * Math.PI
 );
 
-// const material = new MeshPhysicalMaterial({
-//   clearcoat: 1.0,
-//   clearcoatRoughness: 0.1,
-//   metalness: 0.9,
-//   roughness: 0.5,
-//   color: 0x0000ff,
-//   normalMap: normalMap,
-//   side: DoubleSide
-// })
-
 // Constructors
-const createCircle = color => {
+const createCircle = _ => {
+  const color = colors[getRandomInt(3)];
   const material = new MeshStandardMaterial({
-    color: color,
-    emissive: 'black',
-    side: DoubleSide,
-    metalness: 1.0
-  })
+    color: color.color,
+    emissive: color.emissive,
+    metalness: 1.0,
+    roughness: 0.0,
+    envMap: reflectionCube,
+    envMapIntensity: 10,
+    side: DoubleSide
+  });
 
   const circle = new Mesh(geometry, material);
   const moveTween = moveRadialOutwards(circle);
 
   circle.tick = delta => {
-    spinX(circle, delta, 2);
+    spinX(circle, delta, 4);
     moveTween.update();
   }
 

@@ -1,23 +1,36 @@
 import {
   PlaneGeometry,
   MeshStandardMaterial,
-  Mesh
+  Mesh,
+  DoubleSide
 } from 'three';
 
-const geometry = new PlaneGeometry(1, 1);
-const material = new MeshStandardMaterial({ color: 'gray' });
+import { colors } from './colors';
+import { reflectionCube } from './cubeMap'
+import { getRandomInt } from '../utils/functools';
+import { spinX, moveRadialOutwards } from '../systems/animations';
+
+const geometry = new PlaneGeometry(0.1, 0.1);
 
 const createSquare = _ => {
+  const color = colors[getRandomInt(3)];
+  const material = new MeshStandardMaterial({
+    color: color.color,
+    emissive: color.emissive,
+    metalness: 1.0,
+    roughness: 0.0,
+    envMap: reflectionCube,
+    envMapIntensity: 10,
+    side: DoubleSide
+  });
+
   const square = new Mesh(geometry, material);
 
-  square.tick = delta => {
-    square.rotation.x += Math.PI / 4 * delta;
-    square.rotation.y += Math.PI / 4 * delta;
-    square.rotation.z += Math.PI / 4 * delta;
+  const moveTween = moveRadialOutwards(square);
 
-    square.position.x += delta * 0.1;
-    square.position.y += delta * 0.1;
-    square.position.z += delta * 0.1;
+  square.tick = delta => {
+    spinX(square, delta, 4);
+    moveTween.update();
   }
 
   return square;

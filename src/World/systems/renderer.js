@@ -7,7 +7,7 @@ const createRenderer = _ => {
 
   renderer.outputEncoding = sRGBEncoding;
   renderer.toneMapping = ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 0.75;
+  renderer.toneMappingExposure = 1;
 
   return renderer;
 }
