@@ -1,4 +1,24 @@
-import { PerspectiveCamera, OrthographicCamera, Vector3 } from 'three';
+import {
+  AudioListener, Audio, AudioLoader,
+  PerspectiveCamera, OrthographicCamera,
+  Vector3
+} from 'three';
+
+// create an AudioListener and add it to the camera
+const listener = new AudioListener();
+
+// create a global audio source
+const sound = new Audio(listener);
+
+// load a sound and set it as the Audio object's buffer
+const audioLoader = new AudioLoader();
+audioLoader.load( 'assets/audio/bg-music.mp3', buffer => {
+  sound.setBuffer(buffer);
+  sound.setLoop(true);
+  sound.setVolume(0.4);
+  sound.play();
+});
+
 
 const createCamera = container => {
   const camera = new PerspectiveCamera(
@@ -9,6 +29,7 @@ const createCamera = container => {
   );
 
   camera.position.set(0, 0, 10);
+  // camera.add(listener);
 
   return camera;
 }

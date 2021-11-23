@@ -19,6 +19,7 @@
   "dependencies": {
     "@tweenjs/tween.js": "^18",
     "eslint": "^8.2.0",
-    "three": "^0.132.2"
+    "three": "^0.132.2",
+    "tone": "^14.7.77"
   }
 }

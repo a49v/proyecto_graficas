@@ -9,6 +9,7 @@ import { createSphere, createParticleLight } from './components/sphere';
 // Systems
 import { createRenderer } from './systems/renderer';
 import { createControls } from './systems/controls';
+import { synthControls } from './systems/synthControls';
 import { Resizer } from './systems/Resizer';
 import { Loop } from './systems/Loop';
 
@@ -18,6 +19,7 @@ import { getRandomInt } from './utils/functools';
 let scene;
 let camera;
 let controls;
+let synth;
 let renderer;
 let loop;
 
@@ -28,6 +30,7 @@ class World {
     camera = createCamera(container);
     renderer = createRenderer();
     controls = createControls(camera, renderer.domElement);
+    synth = synthControls(container);
     loop = new Loop(camera, scene, renderer);
     container.append(renderer.domElement);
 
@@ -45,7 +48,7 @@ class World {
     loop.updateables.push(controls, particleLight);
 
     // Some event listeners
-    container.addEventListener('click', event => this.spawnObject(), false)
+    window.addEventListener('keydown', event => this.spawnObject())
 
     const resizer = new Resizer(container, camera, renderer);
   }
