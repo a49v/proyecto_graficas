@@ -9,8 +9,10 @@ import {
   Vector3
 } from 'three';
 
+import { reflectionCube } from './cubeMap'
+import { colors } from './colors'
 import { getRandomInt } from '../utils/functools';
-import { spinX, shrink, moveRadialOutwards } from '../systems/animations';
+import { moveRadialOutwards } from '../systems/animations';
 
 const createSphere = (r) => {
   const geometry = new SphereBufferGeometry(
@@ -21,29 +23,26 @@ const createSphere = (r) => {
     0, 2 * Math.PI
   );
 
+  const color = colors[getRandomInt(3)];
   const material = new MeshStandardMaterial({
-    color: ['red', 'green', 'blue'][getRandomInt(3)],
-    emissive: 0x222222,
-    metalness: 0.4,
-    roughness: 0.2,
+    color: color.color,
+    emissive: color.emissive,
+    metalness: 1.0,
+    roughness: 0.0,
+    envMap: reflectionCube,
+    envMapIntensity: 10
   });
 
   const sphere = new Mesh(geometry, material);
 
-  const shrinkTween = shrink(sphere);
   const moveTween = moveRadialOutwards(sphere);
-
-  sphere.tick = delta => {
-    spinX(sphere, delta, 1);
-    moveTween.update();
-    // shrinkTween.update();
-  };
+  sphere.tick = delta => moveTween.update();
 
   return sphere;
 }
 
 const createParticleLight = () => {
-  const geometry = new SphereGeometry(0.05, 8, 8);
+  const geometry = new SphereGeometry(0.05, 10, 10);
   const material = new MeshBasicMaterial({ color: 'white' });
   const particleLight = new Mesh(geometry, material);
 

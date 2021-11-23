@@ -1,8 +1,9 @@
-import { Color, Scene } from 'three';
+import { Color, Scene, CubeTextureLoader, sRGBEncoding } from 'three';
+import { reflectionCube } from './cubeMap'
 
-const createScene = _ => {
+const createScene = bg => {
   const scene = new Scene();
-  scene.background = new Color('black');
+  scene.background = reflectionCube || new Color('black');
 
   return scene;
 }

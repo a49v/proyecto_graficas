@@ -6,7 +6,7 @@ import {
 } from 'three';
 
 const createLights = _ => {
-  const mainLight = new DirectionalLight('white', 6);
+  const mainLight = new DirectionalLight('white', 10);
   // const ambientLight = new AmbientLight('white', 5); // Usually, set this lower than direct light
   const ambientLight = new HemisphereLight(
     'white', // Bright sky color
