@@ -1,7 +1,8 @@
 import {
   DirectionalLight,
   AmbientLight,
-  HemisphereLight
+  HemisphereLight,
+  PointLight
 } from 'three';
 
 const createLights = _ => {
@@ -12,10 +13,11 @@ const createLights = _ => {
     'darkslategray', // Dim ground color
     3 // intensity
   )
+  const pointLight = new PointLight(0xffffff, 8, 800);
 
   mainLight.position.set(0, 0, 10);
 
-  return { mainLight, ambientLight };
+  return { mainLight, ambientLight, pointLight };
 }
 
 export { createLights };

@@ -6,4 +6,6 @@ const zip = (a1, a2) =>
 
 const iota = (n) => [...Array(n).keys()]
 
-export { zip, iota, none };
+const getRandomInt = max => Math.floor(Math.random() * max);
+
+export { zip, iota, none, getRandomInt };

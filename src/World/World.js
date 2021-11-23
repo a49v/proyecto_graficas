@@ -1,9 +1,10 @@
 // Components
 import { createCamera } from './components/camera';
 import { createScene } from './components/scene';
-import { createSquare } from './components/square'
-import { createSphere } from './components/sphere'
-import { createLights } from './components/lights'
+import { createSquare } from './components/square';
+import { createCircle } from './components/circle';
+import { createLights } from './components/lights';
+import { createSphere, createParticleLight } from './components/sphere';
 
 // Systems
 import { createRenderer } from './systems/renderer';
@@ -32,11 +33,14 @@ class World {
     // This is for on demand rendering
     controls.addEventListener('change', () => this.render())
 
-    const { mainLight, ambientLight } = createLights();
-    scene.add(mainLight, ambientLight);
+    const { mainLight, ambientLight, pointLight } = createLights();
+    const particleLight = createParticleLight();
+    particleLight.add(pointLight)
+
+    scene.add(mainLight, ambientLight, particleLight);
 
     // Objects that will be animated
-    loop.updateables.push(controls)
+    loop.updateables.push(controls, particleLight);
 
     // Some event listeners
     container.addEventListener('click', event => this.spawnObject(), false)
@@ -59,7 +63,7 @@ class World {
   stop() { loop.stop() }
 
   spawnObject() {
-    const sphere = createSphere();
+    const sphere = createSphere(0.1);
     scene.add(sphere);
     loop.updateables.push(sphere);
   }
