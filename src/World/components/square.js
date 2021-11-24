@@ -10,10 +10,10 @@ import { reflectionCube } from './cubeMap'
 import { getRandomInt } from '../utils/functools';
 import { spinX, moveRadialOutwards } from '../systems/animations';
 
-const geometry = new PlaneGeometry(0.1, 0.1);
+const geometry = new PlaneGeometry(0.3, 0.3);
 
 const createSquare = _ => {
-  const color = colors[getRandomInt(3)];
+  const color = colors[getRandomInt(11)];
   const material = new MeshStandardMaterial({
     color: color.color,
     emissive: color.emissive,

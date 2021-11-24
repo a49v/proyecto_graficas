@@ -1,14 +1,14 @@
 import { CubeTextureLoader, sRGBEncoding } from 'three';
 
 const reflectionCube = new CubeTextureLoader()
-      .setPath('assets/textures/cube/space/')
+      .setPath('assets/textures/cube/bkg/mix/')
       .load([
-        'space_rt.png',
-        'space_lf.png',
-        'space_up.png',
-        'space_dn.png',
-        'space_ft.png',
-        'space_bk.png'
+        'right.png',
+        'left.png',
+        'top.png',
+        'bottom.png',
+        'front.png',
+        'back.png'
       ]);
 
 // const reflectionCube = new CubeTextureLoader()

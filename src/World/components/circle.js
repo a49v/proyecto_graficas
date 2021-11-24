@@ -17,14 +17,14 @@ const { normalMap, clearcoatNormalMap } = createTexture();
 
 // Geometry and Material
 const geometry = new CircleBufferGeometry(
-  0.1,
+  0.5,
   50,
   0, 2 * Math.PI
 );
 
 // Constructors
 const createCircle = _ => {
-  const color = colors[getRandomInt(3)];
+  const color = colors[getRandomInt(11)];
   const material = new MeshStandardMaterial({
     color: color.color,
     emissive: color.emissive,

@@ -71,7 +71,7 @@ class World {
     let fig;
     switch (getRandomInt(3)) {
       case 0:
-        fig = createSphere(0.1);
+        fig = createSphere(0.5);
         break;
       case 1:
         fig = createSquare()

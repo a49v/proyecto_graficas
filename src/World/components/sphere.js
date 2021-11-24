@@ -23,7 +23,7 @@ const createSphere = (r) => {
     0, 2 * Math.PI
   );
 
-  const color = colors[getRandomInt(3)];
+  const color = colors[getRandomInt(11)];
   const material = new MeshStandardMaterial({
     color: color.color,
     emissive: color.emissive,

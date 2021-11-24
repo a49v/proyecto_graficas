@@ -1,11 +1,14 @@
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import * as Tone from 'tone';
+import { Vector3 } from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-//create a synth and connect it to the main output (your speakers)
-const synth = new Tone.Synth().toDestination();
-
-//play a middle 'C' for the duration of an 8th note
-// synth.triggerAttackRelease("C4", "8n");
+const cameraPoints = {
+  left:   new Vector3(30, 0, 0),
+  right:  new Vector3(-30, 0, 0),
+  back:   new Vector3(0, 0, -30),
+  front:  new Vector3(0, 0, 30),
+  top:    new Vector3(0, -30, 0),
+  bottom: new Vector3(0, 30, 0),
+};
 
 const createControls = (camera, canvas) => {
   const controls = new OrbitControls(camera, canvas);
@@ -17,9 +20,46 @@ const createControls = (camera, canvas) => {
   // damping if we render on demand.
   controls.tick = _ => controls.update();
 
-  canvas.addEventListener('keydown', _ => {
-    console.log('keydown')
-    synth.triggerAttackRelease("C4", "8n")
+
+  // TODO For some reason, using position.set() produces an exception due to
+  // the AudioListener (???)
+  controls.look = direction => {
+    camera.position.x = cameraPoints[direction].x;
+    camera.position.y = cameraPoints[direction].y;
+    camera.position.z = cameraPoints[direction].z;
+  }
+  controls.lookLeft = _ => controls.look('left');
+  controls.lookRight = _ => controls.look('right');
+
+  controls.lookBack = _ => controls.look('back');
+
+  controls.lookUp = _ => controls.look('top');
+  controls.lookDown = _ => controls.look('bottom');
+
+  window.addEventListener('keydown', e => {
+    switch (e.code) {
+      case "ArrowLeft" :
+        controls.lookLeft();
+        camera.tracks.forEach(t => t.pause());
+        camera.tracks[2].play()
+        break;
+      case "ArrowRight":
+        controls.lookBack();
+        camera.tracks.forEach(t => t.pause());
+        camera.tracks[1].play()
+        break;
+      case "ArrowUp"   :
+        controls.lookUp();
+        camera.tracks.forEach(t => t.pause());
+        camera.tracks[0].play()
+        break;
+      case "ArrowDown" :
+        controls.lookDown();
+        camera.tracks.forEach(t => t.pause());
+        camera.tracks[0].play()
+        break;
+      default: break;
+    }
   })
 
   return controls

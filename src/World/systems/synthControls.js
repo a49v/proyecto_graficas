@@ -11,11 +11,13 @@ const keyMap = {
   'KeyK': "C5"
 };
 
-const synthControls = container => {
-  const synth = new Tone.Synth().toDestination();
+const synthControls = async container => {
+  await Tone.start();
+  const synth = new Tone.PolySynth(Tone.FMSynth).toDestination();
+  synth.set({ modulation: { type: 'sine' } });
 
   window.addEventListener('keydown', e => {
-    synth.triggerAttackRelease(keyMap[e.code], "8n");
+    synth.triggerAttackRelease(keyMap[e.code], "4n");
   });
 
   return synth;
