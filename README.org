@@ -1,5 +1,5 @@
-* Onett
-A 3D replica written in Three.js
+* Proyecto Final
+A 3D scene written in Three.js
 
 ** How to run
 Clone this repository and run
