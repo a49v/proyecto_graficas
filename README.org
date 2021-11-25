@@ -1,4 +1,5 @@
 * Proyecto Final
+An audiovisual experience
 A 3D scene written in Three.js
 
 ** How to run
@@ -11,4 +12,4 @@ npm install
 yarn add
 #+end_src
 
-Then, simply issue =yarn start= and access =localhost:10001=
+Then, simply issue =npm start= or =yarn start= and access =localhost:10001=
