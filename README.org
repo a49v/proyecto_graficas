@@ -1,5 +1,8 @@
 * Proyecto Final
-A 3D scene written in Three.js
+A 3D scene written in Three.js. 
+
+- Video demonstration https://youtu.be/Qwpq3rz6Zb4
+- Postprocessing version https://youtu.be/yxLFlGAeNEM
 
 ** How to run
 Clone this repository and run
