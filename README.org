@@ -1,8 +1,8 @@
 * Proyecto Final
 A 3D unique, surreal aduiovisual experience written in Three.js
 
-- Video demonstration https://youtu.be/Qwpq3rz6Zb4
-- Postprocessing version https://youtu.be/yxLFlGAeNEM
+- Video demonstration https://youtu.be/H4AtwKBEZ14
+- Postprocessing version https://youtu.be/BrYcV3awHaY
 - Screenshots: https://imgur.com/a/gNAIGnA
 
 ** How to run
