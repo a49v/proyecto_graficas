@@ -16,12 +16,18 @@ import { Loop } from './systems/Loop';
 // Utils
 import { getRandomInt } from './utils/functools';
 
+// Post Processing
+import { WebGLRenderer } from "three";
+import { BloomEffect, EffectComposer, EffectPass, RenderPass } from "postprocessing";
+
+
 let scene;
 let camera;
 let controls;
 let synth;
 let renderer;
 let loop;
+let composer;
 
 
 class World {
@@ -31,9 +37,22 @@ class World {
     renderer = createRenderer();
     controls = createControls(camera, renderer.domElement);
     synth = synthControls(container);
-    loop = new Loop(camera, scene, renderer);
-    container.append(renderer.domElement);
 
+    //Postprocessing
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    composer.addPass(new EffectPass(camera, new BloomEffect()));
+
+    requestAnimationFrame(function render() {
+
+      requestAnimationFrame(render);
+      composer.render();
+
+    });
+    //
+
+    loop = new Loop(camera, scene, renderer, composer);
+    container.append(renderer.domElement);
 
     // This is for on demand rendering
     controls.addEventListener('change', () => this.render())
