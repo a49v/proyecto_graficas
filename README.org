@@ -1,5 +1,4 @@
 * Proyecto Final
-An audiovisual experience
 A 3D scene written in Three.js
 
 ** How to run
