@@ -16,3 +16,12 @@ yarn add
 #+end_src
 
 Then, simply issue =npm start= or =yarn start= and access =localhost:10001=
+
+** Credits
+- Skyboxes: https://opengameart.org/content/space-skyboxes-0
+- Music: Andrés Ricardo Garza Vela, using Bandlab.
+
+** Notable dependencies
+- Three.js (Graphics)
+- Tone.js  (Synth)
+- Tween.js (Animations)
