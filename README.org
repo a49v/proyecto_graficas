@@ -1,5 +1,5 @@
 * Proyecto Final
-A 3D unique, surreal aduiovisual experience written in Three.js
+A 3D unique, surreal audiovisual experience written in Three.js
 
 - Video demonstration https://youtu.be/H4AtwKBEZ14
 - Postprocessing version https://youtu.be/BrYcV3awHaY
