@@ -17,8 +17,8 @@ import { Loop } from './systems/Loop';
 import { getRandomInt } from './utils/functools';
 
 // Post Processing
-import { WebGLRenderer } from "three";
-import { BloomEffect, EffectComposer, EffectPass, RenderPass } from "postprocessing";
+import { BloomEffect, EffectComposer, EffectPass, RenderPass} from "postprocessing";
+
 
 
 let scene;
@@ -27,7 +27,6 @@ let controls;
 let synth;
 let renderer;
 let loop;
-let composer;
 
 
 class World {
@@ -38,10 +37,15 @@ class World {
     controls = createControls(camera, renderer.domElement);
     synth = synthControls(container);
 
-    //Postprocessing
+    // Postprocessing
+
+    // To add post-processing effects to the image, the render must go through multiple renders known as 'passes'
+    // To this effect, we leave the composer in charge of rendering, so that it organizes the passes.
     const composer = new EffectComposer(renderer);
+    // First, the regular render.
     composer.addPass(new RenderPass(scene, camera));
-    composer.addPass(new EffectPass(camera, new BloomEffect()));
+    // After that, and based on the previous render, we add a Bloom effect to the render.
+    composer.addPass(new EffectPass(camera, (new BloomEffect())));
 
     requestAnimationFrame(function render() {
 
@@ -49,7 +53,6 @@ class World {
       composer.render();
 
     });
-    //
 
     loop = new Loop(camera, scene, renderer, composer);
     container.append(renderer.domElement);
